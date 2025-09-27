@@ -14,7 +14,7 @@
     }
     .container {
       position: relative;
-      height: 300%; /* ✅ 3 pages */
+      height: 200%; /* ✅ only 2 pages now */
       transition: transform 1s ease-in-out; /* ✅ faster slide */
     }
     .page {
@@ -27,6 +27,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
     }
     .front {
       background: url("974023-vertical-maroon-color-background-1920x1200-for-lockscreen.jpg") no-repeat center/cover;
@@ -46,9 +48,8 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
-    .back, .third {
+    .back {
       background: #111;
-      padding: 20px;
       overflow-y: auto;
     }
     /* Slideshow styling */
@@ -75,7 +76,7 @@
 </head>
 <body>
   <div class="container" id="container">
-    <!-- Front Page (Page 1) -->
+    <!-- Page 1 -->
     <div class="page front">
       <h2>UNDANGAN MAJLIS PERKAHWINAN</h2>
       <h1>Iman</h1>
@@ -84,17 +85,14 @@
       <button class="open-btn" onclick="openInvitation()">Open</button>
     </div>
     
-    <!-- Second Page (Page 2) -->
+    <!-- Page 2 -->
     <div class="page back">
       <h2>UNDANGAN MAJLIS PERKAHWINAN</h2>
       <h1>Iman</h1>
       <h3>&</h3>
       <h1>Iwan</h1>
-      <p>Sabtu, 24 Januari 2026</p>
-    </div>
+      <p><b>Sabtu, 24 Januari 2026</b></p>
 
-    <!-- Third Page (Page 3) -->
-    <div class="page third">
       <h2>Hello,</h2>
       <h3>Mr Zul</h3>
       <h3>&</h3>
@@ -134,17 +132,11 @@
 
   <script>
     let music = document.getElementById('music');
-    let page = 0; // track page index
 
     function openInvitation() {
-      page++;
-      document.getElementById('container').style.transform = `translateY(-${page * 100}vh)`;
-      if (page === 1) {
-        music.play();
-      }
-      if (page === 2) {
-        startSlideshow();
-      }
+      document.getElementById('container').style.transform = 'translateY(-100vh)';
+      music.play();
+      startSlideshow();
     }
 
     // Slideshow function
@@ -166,9 +158,6 @@
         music.play();
       }
     });
-
-    // Allow tapping again to move from page 2 → page 3
-    document.querySelector('.back').addEventListener('click', openInvitation);
   </script>
 </body>
 </html>
