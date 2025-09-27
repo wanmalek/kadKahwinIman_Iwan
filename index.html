@@ -135,10 +135,10 @@
 
     function openInvitation() {
       document.getElementById('container').style.transform = 'translateY(-100vh)';
+      document.querySelector('.back').scrollTop = 0;
       music.play();
       startSlideshow();
     }
-
     // Slideshow function
     function startSlideshow() {
       const slides = document.querySelectorAll('.slideshow img');
@@ -161,3 +161,4 @@
   </script>
 </body>
 </html>
+
