@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Birthday Invitation</title>
+  <title>Walimatulurus Iman & Iwan 💍</title>
   <style>
     body, html {
       margin: 0;
@@ -14,8 +14,8 @@
     }
     .container {
       position: relative;
-      height: 200%;
-      transition: transform 2s ease-in-out;
+      height: 300%; /* ✅ 3 pages */
+      transition: transform 1s ease-in-out; /* ✅ faster slide */
     }
     .page {
       position: relative;
@@ -23,15 +23,15 @@
       width: 100%;
       text-align: center;
       color: white;
-    }
-    .front {
-      background: url("974023-vertical-maroon-color-background-1920x1200-for-lockscreen.jpg") no-repeat center/cover;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
-    .front h1, .front h2, .front h3 {
+    .front {
+      background: url("974023-vertical-maroon-color-background-1920x1200-for-lockscreen.jpg") no-repeat center/cover;
+    }
+    .page h1, .page h2, .page h3, .page p {
       margin: 10px 0;
       text-shadow: 2px 2px 4px black;
     }
@@ -46,7 +46,7 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
-    .back {
+    .back, .third {
       background: #111;
       padding: 20px;
       overflow-y: auto;
@@ -62,6 +62,8 @@
       width: 100%;
       border-radius: 10px;
       display: none;
+      background: white;
+      object-fit: contain;
     }
     .slideshow img.active {
       display: block;
@@ -73,28 +75,53 @@
 </head>
 <body>
   <div class="container" id="container">
-    <!-- Front Page -->
+    <!-- Front Page (Page 1) -->
     <div class="page front">
-      <h1>You are invited</h1>
-      <h2>To The Birthday Party</h2>
-      <h3>Of</h3>
-      <h1>My Son</h1>
+      <h2>UNDANGAN MAJLIS PERKAHWINAN</h2>
+      <h1>Iman</h1>
+      <h3>&</h3>
+      <h1>Iwan</h1>
       <button class="open-btn" onclick="openInvitation()">Open</button>
     </div>
     
-    <!-- Back Page -->
+    <!-- Second Page (Page 2) -->
     <div class="page back">
-      <h2>🎉 Birthday Details 🎉</h2>
-      <p><b>Date:</b> 1st November 2025</p>
-      <p><b>Time:</b> 7:00 PM</p>
-      <p><b>Location:</b> My House</p>
-      <p><b>Celebrated:</b> My Son</p>
+      <h2>UNDANGAN MAJLIS PERKAHWINAN</h2>
+      <h1>Iman</h1>
+      <h3>&</h3>
+      <h1>Iwan</h1>
+      <p>Sabtu, 24 Januari 2026</p>
+    </div>
+
+    <!-- Third Page (Page 3) -->
+    <div class="page third">
+      <h2>Hello,</h2>
+      <h3>Mr Zul</h3>
+      <h3>&</h3>
+      <h3>Ms Zul</h3>
+      <p>Invited you to the wedding of</p>
+      <h1>Iman</h1>
+      <h3>&</h3>
+      <h1>Iwan</h1>
+
+      <h2>Date</h2>
+      <p>Sabtu, 24 Januari 2026</p>
+
+      <h2>Itinerary</h2>
+      <p>8:00 am - feast</p>
+      <p>5:00 pm - feast end</p>
+
+      <h2>Location</h2>
+      <p>Owner's House</p>
+
+      <p>May your attendance brings cheer and joy to us</p>
+      <h3>#TheWanForIman</h3>
 
       <!-- Slideshow -->
       <div class="slideshow">
-        <img src="IMG_2534.png" class="active" alt="Birthday 1">
-        <img src="IMG_2529.png" alt="Birthday 2">
-        <img src="IMG_2531.png" alt="Birthday 3">
+        <img src="IMG_2534.png" class="active" alt="Slideshow 1">
+        <img src="IMG_2529.png" alt="Slideshow 2">
+        <img src="IMG_2531.png" alt="Slideshow 3">
       </div>
 
       <!-- Local audio file -->
@@ -107,14 +134,20 @@
 
   <script>
     let music = document.getElementById('music');
+    let page = 0; // track page index
 
     function openInvitation() {
-      document.getElementById('container').style.transform = 'translateY(-100vh)';
-      music.play();
-      startSlideshow();
+      page++;
+      document.getElementById('container').style.transform = `translateY(-${page * 100}vh)`;
+      if (page === 1) {
+        music.play();
+      }
+      if (page === 2) {
+        startSlideshow();
+      }
     }
 
-    // Simple slideshow function
+    // Slideshow function
     function startSlideshow() {
       const slides = document.querySelectorAll('.slideshow img');
       let index = 0;
@@ -122,10 +155,10 @@
         slides[index].classList.remove('active');
         index = (index + 1) % slides.length;
         slides[index].classList.add('active');
-      }, 2000); // 2 seconds per image
+      }, 2000);
     }
 
-    // Pause music when user leaves the page
+    // Pause music when user leaves page
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         music.pause();
@@ -133,6 +166,9 @@
         music.play();
       }
     });
+
+    // Allow tapping again to move from page 2 → page 3
+    document.querySelector('.back').addEventListener('click', openInvitation);
   </script>
 </body>
 </html>
