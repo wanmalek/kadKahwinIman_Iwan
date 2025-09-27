@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Invitation</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      position: relative;
+      height: 200%;
+      transition: transform 2s ease-in-out;
+    }
+    .page {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      text-align: center;
+      color: white;
+    }
+    .front {
+      background: url("YOUR_BACKGROUND_IMAGE.jpg") no-repeat center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .front h1, .front h2, .front h3 {
+      margin: 10px 0;
+      text-shadow: 2px 2px 4px black;
+    }
+    .open-btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #ff4081;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .back {
+      background: #111;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    iframe {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <!-- Front Page -->
+    <div class="page front">
+      <h1>You are invited</h1>
+      <h2>To The Birthday Party</h2>
+      <h3>Of</h3>
+      <h1>My Son</h1>
+      <button class="open-btn" onclick="openInvitation()">Open</button>
+    </div>
+    
+    <!-- Back Page -->
+    <div class="page back">
+      <h2>🎉 Birthday Details 🎉</h2>
+      <p><b>Date:</b> 1st November 2025</p>
+      <p><b>Time:</b> 7:00 PM</p>
+      <p><b>Location:</b> My House</p>
+      <p><b>Celebrated:</b> My Son</p>
+      <img src="PICTURE.jpg" alt="Birthday" width="90%">
+      <iframe id="music" width="0" height="0"
+        src="https://www.youtube.com/embed/5u4xTa3LR2U?autoplay=1&loop=1"
+        frameborder="0" allow="autoplay"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function openInvitation() {
+      document.getElementById('container').style.transform = 'translateY(-100vh)';
+      document.getElementById('music').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
