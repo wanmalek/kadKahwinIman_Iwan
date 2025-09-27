@@ -51,8 +51,8 @@
       padding: 20px;
       overflow-y: auto;
     }
-    iframe {
-      display: none;
+    #music {
+      display: none; /* hidden player */
     }
   </style>
 </head>
@@ -75,16 +75,19 @@
       <p><b>Location:</b> My House</p>
       <p><b>Celebrated:</b> My Son</p>
       <img src="PICTURE.jpg" alt="Birthday" width="90%">
-      <iframe id="music" width="0" height="0"
-        src="https://www.youtube.com/embed/5u4xTa3LR2U?autoplay=1&loop=1"
-        frameborder="0" allow="autoplay"></iframe>
+
+      <!-- Local audio file -->
+      <audio id="music" autoplay loop>
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
     </div>
   </div>
 
   <script>
     function openInvitation() {
       document.getElementById('container').style.transform = 'translateY(-100vh)';
-      document.getElementById('music').style.display = 'block';
+      document.getElementById('music').play();
     }
   </script>
 </body>
