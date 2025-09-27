@@ -9,13 +9,16 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
       font-family: Arial, sans-serif;
+      overflow: hidden; /* ✅ lock initially */
+    }
+    body.unlocked {
+      overflow: auto;   /* ✅ allow scroll after open */
     }
     .container {
       position: relative;
-      min-height: 200%; /* ✅ allow container to grow with content */
-      transition: transform 1s ease-in-out; /* ✅ faster slide */
+      min-height: 200%; 
+      transition: transform 1s ease-in-out;
     }
     .page {
       width: 100%;
@@ -25,7 +28,7 @@
       box-sizing: border-box;
     }
     .front {
-      height: 100vh; /* ✅ only full screen */
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -33,9 +36,8 @@
       background: url("974023-vertical-maroon-color-background-1920x1200-for-lockscreen.jpg") no-repeat center/cover;
     }
     .back {
-      min-height: 100vh; /* ✅ allow scrolling if content > 1 screen */
+      min-height: 100vh;
       background: #111;
-      overflow-y: auto;
     }
     .page h1, .page h2, .page h3, .page p {
       margin: 10px 0;
@@ -70,7 +72,7 @@
       display: block;
     }
     #music {
-      display: none; /* hidden player */
+      display: none;
     }
   </style>
 </head>
@@ -136,13 +138,13 @@
     function openInvitation() {
       const firstPage = document.querySelector('.front');
       const container = document.getElementById('container');
-      container.style.transform = `translateY(-${firstPage.offsetHeight}px)`; // ✅ slide exactly by 1 page
-      document.querySelector('.back').scrollTop = 0; // ✅ reset scroll to very top
+      container.style.transform = `translateY(-${firstPage.offsetHeight}px)`;
+      document.querySelector('.back').scrollTop = 0;
+      document.body.classList.add('unlocked'); // ✅ enable scrolling now
       music.play();
       startSlideshow();
     }
 
-    // Slideshow function
     function startSlideshow() {
       const slides = document.querySelectorAll('.slideshow img');
       let index = 0;
@@ -153,7 +155,6 @@
       }, 2000);
     }
 
-    // Pause music when user leaves page
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         music.pause();
