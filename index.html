@@ -25,7 +25,7 @@
       color: white;
     }
     .front {
-      background: url("YOUR_BACKGROUND_IMAGE.jpg") no-repeat center/cover;
+      background: url("974023-vertical-maroon-color-background-1920x1200-for-lockscreen.jpg") no-repeat center/cover;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -51,6 +51,21 @@
       padding: 20px;
       overflow-y: auto;
     }
+    /* Slideshow styling */
+    .slideshow {
+      position: relative;
+      width: 90%;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+    .slideshow img {
+      width: 100%;
+      border-radius: 10px;
+      display: none;
+    }
+    .slideshow img.active {
+      display: block;
+    }
     #music {
       display: none; /* hidden player */
     }
@@ -74,7 +89,13 @@
       <p><b>Time:</b> 7:00 PM</p>
       <p><b>Location:</b> My House</p>
       <p><b>Celebrated:</b> My Son</p>
-      <img src="PICTURE.jpg" alt="Birthday" width="90%">
+
+      <!-- Slideshow -->
+      <div class="slideshow">
+        <img src="IMG_2534.png" class="active" alt="Birthday 1">
+        <img src="IMG_2529.png" alt="Birthday 2">
+        <img src="IMG_2531.png" alt="Birthday 3">
+      </div>
 
       <!-- Local audio file -->
       <audio id="music" autoplay loop>
@@ -88,6 +109,18 @@
     function openInvitation() {
       document.getElementById('container').style.transform = 'translateY(-100vh)';
       document.getElementById('music').play();
+      startSlideshow();
+    }
+
+    // Simple slideshow function
+    function startSlideshow() {
+      const slides = document.querySelectorAll('.slideshow img');
+      let index = 0;
+      setInterval(() => {
+        slides[index].classList.remove('active');
+        index = (index + 1) % slides.length;
+        slides[index].classList.add('active');
+      }, 2000); // 2 seconds per image
     }
   </script>
 </body>
